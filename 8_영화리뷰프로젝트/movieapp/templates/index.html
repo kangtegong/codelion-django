@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+  <main id="main">
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-left">
+          <h2>Trending Movies</h2>
+          <p>최근 가장 인기있는 영화 목록</p>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          {% for o in obj %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="https://image.tmdb.org/t/p/w500/{{o.backdrop_path}}"class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>{{o.title}}</h4>
+                <p>{{o.release_date}}</p>
+                <div class="portfolio-links">
+                  <a href="{% url 'detail' o.id %}" title="More Details"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+         
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4" data-aos="fade-right">
+            <div class="section-title">
+              <h2>Search</h2>
+              <p>검색하고 싶은 영화 제목을 입력하세요.</p>
+            </div>
+          </div>          
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <form action="" method="POST" role="form" class="submit-form mt-4">
+              <div class="row">
+              </div>
+              <div class="form-group mt-3">
+                {% csrf_token %}
+                {{ form }}
+                <div class="validate"></div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+  {% endblock %}

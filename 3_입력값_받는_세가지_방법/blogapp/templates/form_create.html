@@ -1,0 +1,8 @@
+<h1>django form을 이용한 새 글 작성 페이지</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="새 글 생성하기">
+</form>

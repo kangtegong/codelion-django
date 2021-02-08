@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="alert alert-primary"> {{ post_detail.title }}</h2>
+<span class="badge rounded-pill bg-light">{{ post_detail.date}}</span>
+<br/><hr/>
+<p>
+    {{ post_detail.body }}
+</p>
+<br/><hr/>
+<!-- 댓글 목록 공간 -->
+{% for comment in post_detail.comment_set.all %}
+<span class="badge rounded-pill bg-light">{{ comment.date}}</span>    
+{{ comment }}
+<hr>
+{% endfor %}
+
+<!-- 댓글 입력 공간 -->
+<form method="POST" action="{% url 'new_comment' post_detail.id  %}">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ comment_form }}
+    </div>
+    <input type="submit" class="btn btn-primary btn-icon-split btn-sm" value="댓글 입력">
+</form>
+
+{% endblock %}
+

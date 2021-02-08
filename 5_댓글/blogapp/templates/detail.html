@@ -1,0 +1,21 @@
+{{ blog_detail.title }}
+ 
+{{ blog_detail.date }}
+
+{% if blog_detail.photo %}
+<img src = "{{ blog_detail.photo.url }}" alt="" height="600">
+<br>
+{% endif %}
+
+{{ blog_detail.body | safe }}
+
+<form method="post" action="{% url 'create_comment' blog_detail.id %}">
+    {%csrf_token%}
+    {{comment_form}}
+    <input type="submit">
+</form>
+
+{% for comment in blog_detail.comment_set.all %}
+<p>{{comment}}</p>
+<hr>
+{% endfor %}

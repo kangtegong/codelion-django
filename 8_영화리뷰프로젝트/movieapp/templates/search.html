@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+  <main id="main">
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-left">
+          <h2>Searched Movies</h2>
+          <p>검색 결과</p>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          {% for o in obj %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="https://image.tmdb.org/t/p/w500/{{o.backdrop_path}}"class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>{{o.title}}</h4>
+                <p>{{o.release_date}}</p>
+                <div class="portfolio-links">
+                  <a href="{% url 'detail' o.id %}" title="More Details"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+  </main><!-- End #main -->
+  {% endblock %}

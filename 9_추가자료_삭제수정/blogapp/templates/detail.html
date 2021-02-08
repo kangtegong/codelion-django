@@ -1,0 +1,24 @@
+{{ blog_detail.title }}<br/>
+ 
+{{ blog_detail.date }}<br/>
+
+{% if blog_detail.photo %}<br/>
+<img src = "{{ blog_detail.photo.url }}" alt="" height="600">
+<br>
+{% endif %}
+
+{{ blog_detail.body | safe }}
+
+<form method="post" action="{% url 'create_comment' blog_detail.id %}">
+    {%csrf_token%}
+    {{comment_form}}
+    <input type="submit">
+</form>
+
+{% for comment in blog_detail.comment_set.all %}
+<p>{{comment}}</p>
+<hr>
+{% endfor %}
+
+<a href="{% url 'delete' blog_detail.id %}">삭제</a><br/>
+<a href="{% url 'edit' blog_detail.id %}">수정</a>
